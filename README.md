@@ -126,3 +126,46 @@ graph LR
     I --> E
 
 ```
+
+
+## Data Flow Diagram
+
+``` mermaid
+flowchart TD
+    Start["User Input<br/>GitHub Username"] --> Step1["Step 1:<br/>Validate Username"]
+    
+    Step1 -- Valid --> Step2["Step 2:<br/>Fetch Data from GitHub API"]
+    Step1 -- Invalid --> Error["Show Error Message"]
+    Error -.-> Start
+    
+    Step2 --> Step3["Step 3:<br/>Extract User Profile & Repositories"]
+    
+    subgraph Step4["Step 4: Analyze Each Repository"]
+        direction TB
+        A["Get README"] --> B["Check Documentation"]
+        C["Get Commits"] --> D["Check Activity"]
+        E["Get Languages"] --> F["Check Tech Stack"]
+        G["Get Stars/Forks"] --> H["Check Popularity"]
+    end
+    
+    Step3 --> Step4
+    
+    Step4 --> Step5["Step 5:<br/>Calculate Repository Scores"]
+    Step5 --> Step6["Step 6:<br/>Calculate Overall Portfolio Score"]
+    
+    Step6 --> InsightsMain["Step 7:<br/>Generate Insights"]
+    
+    subgraph Insights["Generate Insights"]
+        direction TB
+        I1["Identify Strengths"]
+        I2["Identify Red Flags"]
+        I3["Recruiter Feedback"]
+        I4["Improvement Roadmap"]
+    end
+    
+    InsightsMain --> Insights
+    Insights --> Step8["Step 8:<br/>Display Results Dashboard"]
+    Step8 --> End["Complete"]
+
+
+```
