@@ -169,3 +169,53 @@ flowchart TD
 
 
 ```
+
+
+ ## Simplified Scoring Flow
+
+
+``` mermaid
+flowchart LR
+    subgraph Input
+        Repos[GitHub Repositories]
+    end
+    
+    subgraph Analysis
+        Doc[Documentation Check]
+        Activity[Activity Check]
+        Languages[Language Check]
+        Popularity[Stars/Forks Check]
+    end
+    
+    subgraph Scoring
+        DocScore[Documentation Score - 25%]
+        ActivityScore[Consistency Score - 20%]
+        DepthScore[Technical Depth - 10%]
+        ImpactScore[Project Impact - 20%]
+        CodeScore[Code Quality - 25%]
+    end
+    
+    subgraph Output
+        Overall[Overall Score 0-100]
+        Grade[Grade A-F]
+    end
+    
+    Repos --> Doc
+    Repos --> Activity
+    Repos --> Languages
+    Repos --> Popularity
+    
+    Doc --> DocScore
+    Activity --> ActivityScore
+    Languages --> DepthScore
+    Popularity --> ImpactScore
+    Repos --> CodeScore
+    
+    DocScore --> Overall
+    ActivityScore --> Overall
+    DepthScore --> Overall
+    ImpactScore --> Overall
+    CodeScore --> Overall
+    
+    Overall --> Grade
+```
